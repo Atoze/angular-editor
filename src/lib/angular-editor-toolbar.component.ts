@@ -1,8 +1,8 @@
-import {Component, ElementRef, EventEmitter, Inject, Output, Renderer2, ViewChild} from "@angular/core";
-import {AngularEditorService} from "./angular-editor.service";
-import {HttpResponse} from "@angular/common/http";
-import {DOCUMENT} from "@angular/common";
-import {CustomClass, Font} from "./config";
+import { Component, ElementRef, EventEmitter, Inject, Output, Renderer2, ViewChild } from "@angular/core";
+import { AngularEditorService } from "./angular-editor.service";
+import { HttpResponse } from "@angular/common/http";
+import { DOCUMENT } from "@angular/common";
+import { CustomClass, Font } from "./config";
 
 @Component({
   selector: 'angular-editor-toolbar',
@@ -35,11 +35,12 @@ export class AngularEditorToolbarComponent {
     "justifyRight", "justifyFull", "indent", "outdent", "insertUnorderedList", "insertOrderedList", "link"];
 
   @Output() execute: EventEmitter<string> = new EventEmitter<string>();
+  @Output() pictureSelected: EventEmitter<void> = new EventEmitter<void>();
 
   @ViewChild('fileInput') myInputFile: ElementRef;
 
   constructor(private _renderer: Renderer2,
-              private editorService: AngularEditorService, @Inject(DOCUMENT) private _document: any) {
+    private editorService: AngularEditorService, @Inject(DOCUMENT) private _document: any) {
   }
 
   /**
@@ -189,6 +190,8 @@ export class AngularEditorToolbarComponent {
    * Upload image when file is selected
    */
   onFileChanged(event) {
+    this.pictureSelected.emit();
+    /*
     const file = event.target.files[0];
       if (file.type.includes("image/")) {
         this.editorService.uploadImage(file).subscribe(e => {
@@ -198,6 +201,7 @@ export class AngularEditorToolbarComponent {
           }
         });
       }
+      */
   }
 
   /**

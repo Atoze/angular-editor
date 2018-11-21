@@ -54,6 +54,8 @@ export class AngularEditorComponent implements OnInit, ControlValueAccessor, Aft
   /** emits `focus` event when focused in to the textarea */
   @Output() focus: EventEmitter<string> = new EventEmitter<string>();
 
+  @Output() pictureSelected: EventEmitter<void> = new EventEmitter<void>();
+
   constructor(private _renderer: Renderer2, private editorService: AngularEditorService, @Inject(DOCUMENT) private _document: any) {
   }
 
@@ -293,6 +295,10 @@ export class AngularEditorComponent implements OnInit, ControlValueAccessor, Aft
       a = a.parentNode;
     }
     this.editorToolbar.triggerBlocks(els);
+  }
+
+  onTogglePicture(){
+    this.pictureSelected.emit();
   }
 
 }
